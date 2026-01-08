@@ -1,21 +1,20 @@
-/*
 
 /* styles/extra.css — sample tweaks for MkDocs Material */
 
-/* 1) Tighter content width on desktop 
+/* 1) Tighter content width on desktop */
 .md-content { max-width: 960px; }
 
-/* 2) Definition list styling 
+/* 2) Definition list styling */
 dt { font-weight: 600; color: var(--md-default-fg-color); }
 dd { margin: .25rem 0 1rem 0; border-left: 3px solid var(--md-primary-fg-color); padding-left: .75rem; }
 
-/* 3) Callout (admonition) accents 
+/* 3) Callout (admonition) accents */
 .md-typeset .admonition { border-radius: .4rem; }
 .md-typeset .admonition.note { border-left: .3rem solid var(--md-accent-fg-color); }
 .md-typeset .admonition.warning { border-left-color: #f59e0b; }
 .md-typeset .admonition.danger { border-left-color: #ef4444; }
 
-/* 4) Code block copy button (pairs with extra.js) 
+/* 4) Code block copy button (pairs with extra.js) */
 .extra-code-wrapper { position: relative; }
 .extra-copy-btn {
   position: absolute; top: .6rem; right: .6rem;
@@ -27,20 +26,18 @@ dd { margin: .25rem 0 1rem 0; border-left: 3px solid var(--md-primary-fg-color);
 }
 .extra-copy-btn:hover { opacity: 1; }
 
-/* 5) Anchor highlight when smooth-scrolling 
+/* 5) Anchor highlight when smooth-scrolling */
 .extra-anchor-highlight { animation: anchorFlash 1.2s ease; }
 @keyframes anchorFlash {
   0% { background: rgba(255, 235, 59, .35); }
   100% { background: transparent; }
 }
 
-/* 6) Minor table polish 
+/* 6) Minor table polish */
 .md-typeset table { border-collapse: collapse; }
 .md-typeset table th, .md-typeset table td { border-bottom: 1px solid var(--md-default-fg-color--lightest); }
 
-/* 7) Small screen nav tabs spacing 
+/* 7) Small screen nav tabs spacing */
 @media (max-width: 768px) {
   .md-tabs__list { gap: .25rem; }
 }
-
-*/

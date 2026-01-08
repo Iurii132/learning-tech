@@ -11,98 +11,187 @@ The following table provides a summary of endpoints:
 
 |**Endpoint**|**Method**|**Description**|
 |--|--|--|
-|/api/items|GET|Returns an array of items stored in memory.|
-|/api/items|POST|Creates a new item in memory based on the provided JSON body.|
-|/api/items/:id|GET|Returns a single item by `id` (404 if not found).|
-|/api/items/:id|DELETE|Deletes an item by `id` (204 on success, 404 if not found).|
+|`/api/items`|GET|Returns an array of items stored in memory.|
+|`/api/items`|POST|Creates a new item in memory based on the provided JSON body.|
+|`/api/items/<id>`|GET|Returns a single item by `id` (404 if not found).|
+|`/api/items/<id>`|DELETE|Deletes an item by `id` (204 on success, 404 if not found).|
 
 
 
 ### GET
 
-- GET /api/items
+- GET `/api/items`
 
     - Description: Returns an array of items stored in memory.
     - Response: 200 OK
 
-**Example response:**
+**Example - curl:**
 
-```json
+Request: `curl http://localhost:8080/api/items`
+
+Response: `[{"id":"ye5q3z8hzimk553jxu","received":"2026-01-08T07:42:31.602Z","payload":{"name":"test"}}]`
+	
+![media](media/index4.png)
+
+**Example - Postman:**
+
+Request:
+
+- Method: GET
+
+- URL: http://localhost:8080/api/items
+
+Response: 200 OK (Request successful. The server responded as required.)
+
+Response body:
+
+```JSON
 [
-  {
-    "id": "abc123",
-    "received": "2026-01-07T12:34:56.789Z",
-    "payload": { "name": "test" }
-  }
+    {
+        "id": "eaupwdpol3dmk55h47i",
+        "received": "2026-01-08T07:53:04.398Z",
+        "payload": {
+            "param1": "param1_value",
+            "param2": "param2_value",
+            "name": "value"
+        }
+    },
+    {
+        "id": "26s58izyhxtmk55zj26",
+        "received": "2026-01-08T08:07:23.454Z",
+        "payload": {
+            "param1": "param1_value",
+            "param2": "param2_value",
+            "name": "value"
+        }
+    }
 ]
 ```
 
+![media](media/index3.png)
+
+
 ### POST
 
-- POST /api/items
+- POST `/api/items`
 
-    - Description: Accepts JSON body and creates a new item.
+    - Description: Accepts an arbitrary JSON body and creates a new item.
     - Request body: any non-empty JSON object. Example: `{ "name": "sample" }`
     - Success: 201 Created with the created item in the response body.
     - Error: 400 Bad Request when payload is empty or invalid JSON.
 
 
-### GET /api/items/:id
+**Example - curl:**
+
+Request: `curl -X POST "http://localhost:8080/api/items" -H "Content-Type: application/json" -d "{\"name\":\"test\"}"`
+
+Response: `{"id":"ye5q3z8hzimk553jxu","received":"2026-01-08T07:42:31.602Z","payload":{"name":"test"}}`
+
+**Example - Postman:**
+    
+Request:
+
+- Method: POST
+- URL: http://localhost:8080/api/items
+- Headers: 
+
+    -  Key: Content-Type
+    -  Value: application/json
+	
+- Body: raw → JSON
+   
+    ```JSON
+    {
+      "name": "Sample Item",
+      "description": "This is a test item for API validation",
+      "quantity": 42,
+      "price": 19.99,
+      "tags": ["test", "api", "json"],
+      "metadata": {
+        "createdBy": "Iurii",
+        "timestamp": "2026-01-07T10:30:00Z",
+        "status": "active"
+      },
+      "attributes": [
+        {
+          "key": "color",
+          "value": "blue"
+        },
+        {
+          "key": "size",
+          "value": "medium"
+        }
+      ]
+    }
+    ```
+
+Response: 201 Created (A new resource was created successfully)
+
+Response body:
+
+```JSON
+{
+    "id": "7c1tgp4dq7smk57xw9d",
+    "received": "2026-01-08T09:02:06.481Z",
+    "payload": {
+        "name": "Sample Item",
+        "description": "This is a test item for API validation",
+        "quantity": 42,
+        "price": 19.99,
+        "tags": [
+            "test",
+            "api",
+            "json"
+        ],
+        "metadata": {
+            "createdBy": "Iurii",
+            "timestamp": "2026-01-07T10:30:00Z",
+            "status": "active"
+        },
+        "attributes": [
+            {
+                "key": "color",
+                "value": "blue"
+            },
+            {
+                "key": "size",
+                "value": "medium"
+            }
+        ]
+    }
+}
+```
+
+![media](media/index2.png)
+
+### GET by id
+
+GET `/api/items/<id>`
 
 - Description: Returns a single item by `id`.
+
 - Response: 200 OK with the item body, or 404 Not Found if the id does not exist.
 
-### DELETE /api/items/:id
+**Example - curl:**
+
+Request: `curl -s http://localhost:8080/api/items/ye5q3z8hzimk553jxu`
+
+Response: `{"id":"ye5q3z8hzimk553jxu","received":"2026-01-08T07:42:31.602Z","payload":{"name":"test"}}`
+
+### DELETE by id
+
+DELETE `/api/items/<id>`
 
 - Description: Deletes the item with the given `id`.
 - Success: 204 No Content on successful deletion.
 - Error: 404 Not Found if the id does not exist.
 
+**Example - curl:**
 
-### Example requests
+Request: `curl -X DELETE http://localhost:8080/api/items/26s58izyhxtmk55zj26`
 
-#### Curl
+Response: Empty.
 
-- Create item:
-
-    ```curl
-	-X POST http://localhost:8080/api/items \
-      -H "Content-Type: application/json" \
-      -d '{"name":"test"}'
-    ```
-
-- Retrieve items:
-
-    ```curl http://localhost:8080/api/items```
-
-- Retrieve item by id:
-
-    ```bash
-    curl http://localhost:8080/api/items/<id>
-    ```
-
-- Delete item by id:
-
-    ```bash
-    curl -X DELETE http://localhost:8080/api/items/<id>
-    ```
-
-#### Postman
-
-- Method: POST
-- Headers: 
-    -  Key: Content-Type
-    -  Value: application/json
-- Body:
-   
-    ```JSON
-      {
-       "param1": "param1_value",
-       "param2": "param2_value"
-      }   
-	 ```
-	
-![media](media/index2.png)
 	
 ## Notes
 
