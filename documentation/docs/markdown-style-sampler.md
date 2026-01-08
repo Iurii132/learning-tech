@@ -1,6 +1,6 @@
 ## Overview
 
-This file shows common markdown syntax.
+This page includes common markdown syntax.
 
 ## Paragraph text
 

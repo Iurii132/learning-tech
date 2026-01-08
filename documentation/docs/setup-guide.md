@@ -1,6 +1,6 @@
 # Overview
 
-This guide explains how to run the server application `server.js` locally.
+This guide explains how to set up and run the server application `server.js` locally.
 
 ## Prerequisites
 
