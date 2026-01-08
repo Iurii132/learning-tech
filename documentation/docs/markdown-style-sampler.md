@@ -1,31 +1,60 @@
+## Overview
 
-# Heading 1 — `#`
+This file shows common markdown syntax.
+
+## Paragraph text
 
 Intro paragraph showing **bold**, *italic*, and `inline code`. Also a [link](https://example.com) and an image:
 
-![Alt text for image](https://via.placeholder.com/400x150 "Placeholder Image")
+![Alt text for image](https://www.mkdocs.org/img/favicon.ico "Placeholder Image")
 
 ---
 
-## Heading 2 — `##`
+# Heading 1
 
-### Heading 3 — `###`
+Use the `#` symbol to define a heading.
 
-#### Heading 4 — `####`
 
-##### Heading 5 — `#####`
 
-###### Heading 6 — `######`
+## Heading 2 
+
+ `##`
+
+### Heading 3 
+
+`###`
+
+#### Heading 4 
+
+ `####`
+
+##### Heading 5 
+
+ `#####`
+
+###### Heading 6 
+
+ `######`
 
 ---
 
-## Lists — `-`, `*`, `+` (bulleted) and `1.` (ordered)
+## Lists 
+
+ `-`, `*`, `+` (bulleted) and `1.` (ordered)
 
 List:
 
 - Bullet item using `-`
-    - Nested bullet
-        - Third level
+
+    Indented text `four spaces`
+
+    - Nested bullet `-` plus four spaces ` `
+	
+        Indented text `eight spaces`
+	
+        - Third level  `-` plus eight spaces ` `
+		
+            Indented text `twelve spaces`Indented text `twelve spaces`
 	
 List:
 
@@ -39,9 +68,11 @@ List:
 List:
 
 1. First ordered item using `1.`
-2. Second ordered item
-   1. Nested ordered item
-   2. Another nested item
+
+1. Second ordered item
+
+    1. Nested ordered item `1.` plus four spaces ` `
+    1. Another nested item
 
 
 List:
@@ -51,7 +82,9 @@ List:
 
 ---
 
-## Blockquotes — `>`
+## Blockquotes 
+
+ `>`
 
 > This is a blockquote introduced by `>`. It can span multiple lines.
 > 
@@ -59,33 +92,38 @@ List:
 
 ---
 
-## Admonitions / Callouts — GitHub-style `> !!!NOTE`, `> [!TIP]`, etc.
+## Admonitions / Callouts 
 
- !!!NOTE
-     This is a **Note** callout using `!!!NOTE`.
+!!!NOTE
+    This is a **Note** callout using `!!!NOTE`. The text is in a separate paragraph prefixed with four spaces.
 	 
->
-> Use it to highlight important information.
 
-!!! TIP
+
+!!!TIP
  
-    This is a **Tip** callout using `!!! TIP`.
+    This is a **Tip** callout using `!!! TIP`. The text is in a separate paragraph prefixed with four spaces.
  
->
-> Tips provide helpful hints or best practices.
 
-> [!WARNING]
-> This is a **Warning** callout using `> [!WARNING]`.
+!!!WARNING
+    This is a **Warning** callout using `!!!WARNING`. The text is in a separate paragraph prefixed with four spaces.
 
-> [!IMPORTANT]
-> This is an **Important** callout using `> [!IMPORTANT]`.
+!!!IMPORTANT
+    This is an **Important** callout using `!!!IMPORTANT`. The text is in a separate paragraph prefixed with four spaces.
 
-> [!CAUTION]
-> This is a **Caution** callout using `> [!CAUTION]`.
+!!!CAUTION
+    This is a **Caution** callout using `!!!CAUTION`. The text is in a separate paragraph prefixed with four spaces.
 
 ---
 
-## Code — fenced blocks ``` and language hints
+## Code — line 
+
+Opening and closing "`".
+
+`code`
+
+## Code — fenced blocks 
+
+Opening and closing three /`  and launguage hints.
 
 ```bash
 # Bash sample
@@ -110,7 +148,9 @@ print(roots)
 
 ---
 
-## Tables — pipes `|` and dashes `-`
+## Tables 
+
+Pipes `|` and dashes `-`
 
 | Column A — header | Column B — header | Column C — header |
 |-------------------|-------------------|-------------------|
@@ -126,23 +166,18 @@ print(roots)
 
 ---
 
-## Horizontal rule — `---` or `***` or `___`
+## Horizontal rule 
+
+ `---` or `***` or `___`
 
 Above and below this section are horizontal rules.
 
 ---
 
-## Definition list (common extension)
 
-Term
-: Definition for the term (syntax: `Term` then newline then `: definition`).
+## Footnotes 
 
-Another term
-: Another definition line.
-
----
-
-## Footnotes — `[^1]`
+ `[^1]`
 
 Here is a sentence with a footnote reference.[^1]
 
@@ -150,7 +185,9 @@ Here is a sentence with a footnote reference.[^1]
 
 ---
 
-## Task-specific metadata (YAML front matter) — `---` at top (optional)
+## Task-specific metadata (YAML front matter) 
+
+ `---` at top (optional)
 
 You can add YAML front matter at the top of a file for site generators:
 
@@ -164,28 +201,6 @@ author: "Your Name"
 
 ---
 
-## Diagrams — Mermaid fenced block ```mermaid```
-
-```mermaid
-flowchart TD
-    A[Start] --> B{Is it Markdown?}
-    B -- Yes --> C[Render nicely]
-    B -- No --> D[Convert or revise]
-    C --> E[Ship]
-    D --> B
-```
-
-Another Mermaid example (sequence diagram):
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant S as System
-    U->>S: Request sample MD
-    S-->>U: Return Markdown file
-```
-
----
 
 ## HTML passthrough (when allowed)
 
@@ -195,7 +210,9 @@ sequenceDiagram
 
 ---
 
-## Escaping Characters — `\` (backslash)
+## Escaping Characters 
+
+ `\` (backslash)
 
 Use a backslash to escape special characters: \* \_ \# \[ \] \( \) \`.
 
@@ -205,7 +222,9 @@ Use a backslash to escape special characters: \* \_ \# \[ \] \( \) \`.
 
 Most platforms auto-generate heading anchors. You can also create manual anchors:
 
-### Custom Anchor {#custom-anchor}
+### Custom Anchor
+
+{#custom-anchor}
 
 Link to the custom anchor: [Jump to custom anchor](#custom-anchor)
 
@@ -223,8 +242,8 @@ Link to the custom anchor: [Jump to custom anchor](#custom-anchor)
 - Ordered lists — `1.`
 - Task lists — `- [ ]`, `- [x]`
 - Blockquotes — `>`
-- Callouts — `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`, `> [!IMPORTANT]`, `> [!CAUTION]`
-- Code blocks — triple backticks ``` with language hints
+- Callouts — `!!!Note` and so on
+- Code blocks — triple backticks ` with language hints
 - Inline code — backticks `
 - Bold — `**text**`
 - Italic — `*text*`
@@ -233,8 +252,6 @@ Link to the custom anchor: [Jump to custom anchor](#custom-anchor)
 - Tables — `|` with header separator row made of `-`
 - Horizontal rules — `---`, `***`, `___`
 - Footnotes — `[^id]`
-- Definition lists — `Term` followed by `: definition`
-- Mermaid diagrams — fenced ```mermaid```
 - HTML passthrough — `<div>...</div>`
 - Escapes — `\`
 - Custom anchor attribute — `{#id}`

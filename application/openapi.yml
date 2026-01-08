@@ -1,0 +1,168 @@
+
+openapi: 3.0.3
+info:
+  title: Simple Items API
+  version: 1.0.0
+  description: |
+    Minimal local API with in-memory storage.
+    Endpoints:
+      - GET /api/items
+      - POST /api/items
+      - GET /api/items/{id}
+      - DELETE /api/items/{id}
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+
+  /api/items:
+    get:
+      summary: List all items
+      responses:
+        '200':
+          description: A JSON array of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+              examples:
+                sample:
+                  value:
+                    - id: 8d6b2e5a-9b1b-4e2d-b8e3-8b2f2c0c3b22
+                      received: 2025-01-01T10:00:00Z
+                      payload:
+                        name: hello
+                        count: 1
+    post:
+      summary: Create an item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+            examples:
+              sample:
+                value:
+                  name: test
+                  count: 1
+      responses:
+        '201':
+          description: Created item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+              examples:
+                created:
+                  value:
+                    id: 5f4c3b2a-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+                    received: 2025-01-01T10:01:00Z
+                    payload:
+                      name: test
+                      count: 1
+        '400':
+          description: Invalid JSON or empty body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/items/{id}:
+    get:
+      summary: Get an item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Item unique identifier (UUID or string)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete an item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: string
+                required:
+                  - deleted
+              example:
+                deleted: 5f4c3b2a-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+        '404':
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier
+          example: 5f4c3b2a-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+        received:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when item was created
+          example: 2025-01-01T10:01:00Z
+        updated:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when item was updated (if PUT was used)
+          example: 2025-01-01T11:00:00Z
+        payload:
+          $ref: '#/components/schemas/Payload'
+      required:
+        - id
+        - received
+        - payload
+
+    Payload:
+      type: object
+      description: Arbitrary JSON payload stored with the item
+      additionalProperties: true
+      example:
+        name: test
+        count: 1
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Not found
+      required:
+        - error
