@@ -45,7 +45,7 @@ theme:
     - search.highlight
     - search.share
     - content.code.copy
-    - content.action.edit   # shows "Edit this page" if repo settings are set
+#    - content.action.edit   # shows "Edit this page" if repo settings are set
   icon:
     repo: fontawesome/brands/github
 
@@ -60,7 +60,11 @@ markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
   - pymdownx.inlinehilite
 #  - pymdownx.emoji:
